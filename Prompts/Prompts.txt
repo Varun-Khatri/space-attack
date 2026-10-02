@@ -1,0 +1,488 @@
+Prompt 1
+
+## Role 
+
+Act as a Senior Game Programmer
+
+## Task
+
+Build a complete, polished browser arcade game called **“Space Attack”**, inspired by the gameplay feel and structure of the **Space Attack Arcade longplay game**.
+
+## Goal
+
+Create a small but polished, immediately playable arcade space-shooter that feels like a finished game rather than a programming demo.
+
+The game should run entirely in the browser and require **no backend**.
+
+Use **HTML5 Canvas + vanilla JavaScript + CSS** unless there is a strong technical reason to use another approach.
+
+Do not use external assets, libraries, frameworks, CDNs, or external APIs unless absolutely necessary. Prefer procedural/vector-style graphics generated directly in Canvas.
+
+---
+
+## Core Gameplay
+
+The player controls a spaceship and must survive increasingly difficult waves of enemy ships while destroying them for points.
+
+### Player
+
+* Player controls a spaceship near the bottom of the screen.
+* Move left/right using:
+
+  * `A` / `D`
+  * `Left Arrow` / `Right Arrow`
+* Fire using:
+
+  * `Space`
+* Movement should feel responsive and smooth.
+* Prevent the player from moving outside the play area.
+* Add a small visual effect when firing.
+* Add a subtle hit/damage effect when the player is struck.
+
+### Shooting
+
+* Player projectiles travel upward.
+* Enemies can be destroyed by player projectiles.
+* Prevent excessive projectile spam with a small fire-rate cooldown.
+* Make shooting feel responsive.
+* Add a small muzzle/projectile effect when firing.
+
+---
+
+## Enemy Waves
+
+Create multiple enemy waves.
+
+Each wave should contain several enemies arranged in recognizable arcade-style formations.
+
+Enemy behavior should include some variation, for example:
+
+* Basic enemies that move downward.
+* Enemies that move side-to-side while descending.
+* Occasional enemies that move faster or behave differently.
+
+Do not make every enemy behave identically.
+
+### Wave progression
+
+After all enemies in a wave are destroyed:
+
+1. Briefly display the next-wave announcement.
+2. Spawn the next wave.
+3. Increase difficulty.
+
+Difficulty should progressively increase through factors such as:
+
+* More enemies.
+* Faster enemy movement.
+* Higher enemy projectile frequency.
+* More complex formations.
+* Stronger enemy types appearing later.
+
+The difficulty should increase gradually rather than becoming unfair immediately.
+
+---
+
+## Enemy Shooting
+
+Some enemies should periodically fire projectiles toward the player.
+
+Enemy bullets should:
+
+* Travel toward the player.
+* Be visually distinct from player bullets.
+* Damage the player on collision.
+* Be removed when they leave the screen.
+
+Avoid creating so many bullets that the game becomes visually cluttered or unfair.
+
+---
+
+## Collision Detection
+
+Implement reliable collision detection for:
+
+* Player bullets → enemies
+* Enemy bullets → player
+* Enemies → player
+
+When an enemy is destroyed:
+
+* Increase the score.
+* Play a small explosion effect.
+* Remove the enemy.
+* Spawn a new particle/explosion effect.
+
+Collision detection should not allow a single projectile to incorrectly damage multiple enemies.
+
+---
+
+## Player Health / Lives
+
+Give the player **3 lives** or an equivalent health system.
+
+Display the current health/lives clearly in the HUD.
+
+When the player is hit:
+
+* Reduce health/lives.
+* Briefly flash the player.
+* Give the player a short invulnerability period.
+* Provide a visual damage effect.
+
+When health reaches zero:
+
+* Stop gameplay.
+* Transition to the Game Over screen.
+* Display the final score.
+* Allow the player to restart.
+
+---
+
+## Scoring
+
+Create a visible score system.
+
+Example:
+
+* Basic enemy: 100 points
+* Faster/stronger enemy: 250 points
+* Special enemy: 500 points
+
+Display:
+
+**SCORE: 000000**
+
+Use a visually prominent arcade-style HUD.
+
+Optionally add a small combo or wave bonus, but keep the system simple.
+
+---
+
+## Game States
+
+Implement these game states:
+
+### 1. Start Screen
+
+Show:
+
+**SPACE ATTACK**
+
+Subtitle:
+
+**Defend the galaxy. Survive the waves.**
+
+Display controls:
+
+**MOVE:** A/D or ←/→
+**FIRE:** SPACE
+
+Include a prominent:
+
+**START GAME**
+
+button.
+
+The game should also be startable with `Enter` or `Space`.
+
+---
+
+### 2. Playing
+
+Display:
+
+* Score
+* Lives/Health
+* Current Wave
+* Controls/instructions
+
+Keep the HUD readable without obstructing gameplay.
+
+---
+
+### 3. Wave Transition
+
+When a wave is completed, briefly show:
+
+**WAVE 2**
+
+or equivalent.
+
+Pause spawning/gameplay for a short moment before starting the next wave.
+
+---
+
+### 4. Game Over
+
+Display:
+
+**GAME OVER**
+
+Then:
+
+**SCORE: 001250**
+
+and:
+
+**WAVE: 5**
+
+Include:
+
+**RESTART**
+
+The player should be able to restart using:
+
+* Button click
+* `Enter`
+* `Space`
+
+Restart must completely reset:
+
+* Score
+* Lives
+* Wave
+* Enemies
+* Bullets
+* Particles
+* Timers
+* Difficulty
+* Player position
+
+---
+
+## Visual Style
+
+Use a polished **retro-futuristic arcade space aesthetic**.
+
+Suggested visual direction:
+
+* Dark space background.
+* Subtle stars moving slowly in the background.
+* Bright spaceship.
+* Distinct enemy silhouettes.
+* Bright projectile effects.
+* Particle explosions.
+* Subtle screen shake when appropriate.
+* Clear arcade-style typography.
+* Strong contrast between gameplay objects and the background.
+
+Do NOT simply draw plain rectangles and circles.
+
+Even though assets are not required, create recognizable ships using Canvas shapes, polygons, lines, and gradients.
+
+The game should visually communicate:
+
+**“retro arcade game”**
+
+rather than:
+
+**“JavaScript programming demo.”**
+
+---
+
+## Effects
+
+Add lightweight polish such as:
+
+* Starfield/parallax background.
+* Enemy explosion particles.
+* Player firing effects.
+* Enemy firing effects.
+* Small screen shake on significant impacts.
+* Player damage flash.
+* Wave transition animation.
+* Game-over transition.
+* Subtle UI animations.
+
+Keep effects performant.
+
+---
+
+## Audio
+
+If audio can be implemented without external assets, add simple procedural or Web Audio API effects for:
+
+* Player shooting
+* Enemy destruction
+* Player damage
+* Wave transition
+* Game over
+
+Do not make audio mandatory for the game to function.
+
+Include a simple mute/unmute control if audio is implemented.
+
+Because browsers commonly block autoplay, initialize audio only after the player interacts with the Start button or otherwise interacts with the game.
+
+---
+
+## Responsive Design
+
+The game should work on:
+
+* Desktop
+* Laptop
+* Different browser window sizes
+
+Maintain the game's aspect ratio where practical.
+
+The Canvas should resize appropriately while keeping gameplay coordinates consistent.
+
+Prioritize keyboard desktop gameplay.
+
+Do not add unnecessary mobile controls unless they can be implemented cleanly.
+
+---
+
+## Performance
+
+Use a proper game loop based on:
+
+`requestAnimationFrame`
+
+Use delta time where appropriate so gameplay speed does not depend directly on frame rate.
+
+Avoid unnecessary object creation inside the main game loop.
+
+Clean up destroyed enemies, bullets, and particles.
+
+The game should remain smooth with many objects on screen.
+
+---
+
+## Code Architecture
+
+Keep the code clean and maintainable.
+
+Separate responsibilities logically, for example:
+
+* Game state
+* Player
+* Enemy
+* Projectile
+* Particle effects
+* Collision detection
+* Wave management
+* Rendering
+* Input handling
+* Audio
+* UI
+
+Use classes or well-structured modules where appropriate.
+
+Avoid putting the entire game into one giant function.
+
+Use clear variable and function names.
+
+Add concise comments around important systems.
+
+---
+
+## Important Gameplay Requirements
+
+The finished game MUST have:
+
+* [ ] Start screen
+* [ ] Playable spaceship
+* [ ] Keyboard movement
+* [ ] Keyboard firing
+* [ ] On-screen controls
+* [ ] Enemy waves
+* [ ] Enemy movement
+* [ ] Enemy shooting
+* [ ] Working collisions
+* [ ] Score
+* [ ] Health/lives
+* [ ] Increasing difficulty
+* [ ] Wave progression
+* [ ] Game Over screen
+* [ ] Restart functionality
+* [ ] Visual effects
+* [ ] Polished presentation
+* [ ] Responsive Canvas
+* [ ] No game-breaking console errors
+
+---
+
+## Feel and Pacing
+
+The game should be easy to understand within the first few seconds.
+
+The first wave should be relatively easy and act as an introduction.
+
+Later waves should progressively become more challenging.
+
+The player should always understand:
+
+* Where they are.
+* What enemies are dangerous.
+* How many lives they have.
+* What wave they are on.
+* How many points they have.
+* What they need to do next.
+
+Avoid unnecessary complexity.
+
+The goal is **small scope + high polish**.
+
+---
+
+## Final Deliverable
+
+Provide the complete working project.
+
+Prefer this structure:
+
+```text
+space-attack/
+├── index.html
+├── style.css
+├── game.js
+└── README.md
+```
+
+The game must be playable by opening `index.html` in a modern browser.
+
+Before considering the task complete, test the complete gameplay flow:
+
+**Start → Wave 1 → Destroy enemies → Wave 2 → Increasing difficulty → Player dies → Game Over → Restart → New Game**
+
+Fix any bugs, broken controls, collision issues, state-reset problems, or console errors you encounter.
+
+Do not leave placeholder functionality.
+
+The final result should feel like a **small, polished arcade game that could reasonably be submitted as a finished browser-game assignment**, not merely a technical prototype.
+
+
+
+
+Prompt 2
+
+lets change the difficulty progression/ wave progression curve to be a sawtooth or oscillating curve. The introduction of different enemy types, speed, enemy gun type and enemy count per wave should follow this progression curve. The different types of guns should be inspired from the bullet hell genre. These guns can also be dropped by enemies for hte player to pick up and use for a specific time (also changing depending on the progression curve).
+
+
+Prompt 3
+
+There are two bugs
+1. After I die (eg at wave 04 with score 3400) and before the game over screen shows if I press space, it starts a new game then the game over screen shows up and the game ends at wave 01, score 000.
+2. Bullets and Pickups dont get cleared when a wave is cleared, if a bullet is fired and a pick up is floating when the wave ends, it remains even after the new wave spawns and enemies can get hit by the left over bullets
+the following data must be cleared before a wave is spawned
+1. Bullets already spawned
+2. Pickup already spawned
+3. Currently active pickup must be cleared
+Space to start new game must only work in the menu screen not in any other screen like the game screen/game over screen.
+
+Prompt 4
+
+
+add a pause button and pause functionality. Add a new kind of drop, heart, which will add one to the life/hull integrity, max life/hull integrity will still be capped at 3.
+
+
+Prompt 5
+
+Add a back to menu button in game over screen and pause screen, also add restart button in pause screen. Show the button to pause/resume the game in the menu screen along with the other instructions
+
+Prompt 6
+
+For the main menu, game over and pause, handle text scaling and button positions for different resolutions, specially when windows are shrunk. Similarly handle scaling and position during the game as well
